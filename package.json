@@ -1,0 +1,31 @@
+{
+  "name": "nodejs-express-mongo-auth",
+  "version": "1.0.0",
+  "description": "A simple project skeleton for NodeJS, ExpressJS and MongoDB.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kravigupta/nodejs-express-mongo-auth.git"
+  },
+  "keywords": [
+    "nodejs",
+    "expressjs",
+    "mongodb",
+    "authentication"
+  ],
+  "author": "Ravi Kumar Gupta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kravigupta/nodejs-express-mongo-auth/issues"
+  },
+  "homepage": "https://github.com/kravigupta/nodejs-express-mongo-auth#readme",
+  "dependencies": {
+    "console-stamp": "^0.2.6",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.12"
+  }
+}
