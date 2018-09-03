@@ -23,9 +23,12 @@
   },
   "homepage": "https://github.com/kravigupta/nodejs-express-mongo-auth#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "console-stamp": "^0.2.6",
+    "cookie-parser": "^1.4.3",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
     "mongoose": "^5.2.12"
   }
 }

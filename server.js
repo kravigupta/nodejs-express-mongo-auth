@@ -17,15 +17,27 @@ const config = {
 const express = require("express");
 var app = express();
 
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+
+const session = require("express-session");
+app.use(session({ secret: '!@@#$@#$XCS@#$%#$DS$#%&$%^$%', key: 'server' }));
+
+app.use(express.static(path.join(__dirname, "public")));
+
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
+
 var routes = require("./router/routes");
 
 function startServer() {
 
 	app.use("/", routes);
-	app.use(express.static(path.join(__dirname, "public")));
-	app.set('views', __dirname + '/views');
-	app.set('view engine', 'ejs');
-	app.engine('html', require('ejs').renderFile);
 
 	console.log("Starting Server ..");
 	app.listen(config.port, config.host, function () {
