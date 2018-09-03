@@ -34,11 +34,10 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
 var routes = require("./router/routes");
+app.use("/", routes);
 
 function startServer() {
-
-	app.use("/", routes);
-
+	
 	console.log("Starting Server ..");
 	app.listen(config.port, config.host, function () {
 		console.log("Server is listening on port " + config.port);
