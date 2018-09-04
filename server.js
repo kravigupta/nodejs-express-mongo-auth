@@ -9,10 +9,23 @@ require("console-stamp")(console, {
 	pattern: "yyyy-mm-dd HH:MM:ss Z"
 });
 
-const config = {
+global.config = {
 	port: 10000,
-	host: '127.0.0.1'
+	host: '127.0.0.1',
+	db : {
+		user: 'ravi',
+		password: 'ravi',
+		host: '127.0.0.1',
+		port: 27017,
+		dbname: 'Server',
+		authDB: 'admin'
+	}
 }
+
+const db = require('mongoose');
+// db connection
+require('./config/db.js');
+
 
 const express = require("express");
 var app = express();
@@ -37,7 +50,7 @@ var routes = require("./router/routes");
 app.use("/", routes);
 
 function startServer() {
-	
+
 	console.log("Starting Server ..");
 	app.listen(config.port, config.host, function () {
 		console.log("Server is listening on port " + config.port);
