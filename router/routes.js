@@ -1,5 +1,6 @@
 const express = require("express");
 var router = express.Router();
+const serverHelper = require('../services/helper.js');
 
 
 /************** LOGIN and LOGOUT *****************/
@@ -15,10 +16,21 @@ router.post('/login', function (req, res) {
 	console.log("Email - " + email);
 	console.log("Password - " + password);
 	// code to check email and password against database
-	session = req.session;
-	session.email = email;
-	// render the html
-	res.redirect('/home');
+	serverHelper.verifyUser(email, password).then(function(isValidUser){
+		console.log(isValidUser);
+		if (isValidUser) {
+			
+			session = req.session;
+			session.email = email;
+			// render the html
+			res.redirect('/home');
+		} else {
+			res.redirect('/login');
+		}
+	});
+	
+
+
 });
 
 router.get('/logout', function (req, res) {

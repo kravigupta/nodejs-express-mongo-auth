@@ -22,7 +22,7 @@ global.config = {
 	}
 }
 
-const db = require('mongoose');
+global.db = require('mongoose');
 // db connection
 require('./config/db.js');
 
@@ -51,6 +51,8 @@ app.use("/", routes);
 
 function startServer() {
 
+	const UserModel = db.model('User');
+	console.log(UserModel);
 	console.log("Starting Server ..");
 	app.listen(config.port, config.host, function () {
 		console.log("Server is listening on port " + config.port);

@@ -24,3 +24,4 @@ mongoose.connection.on('disconnected', function () {
 	console.log("Disconnected from DB.");
 });
 
+require('../model/User');
