@@ -1,6 +1,6 @@
 const express = require("express");
 var router = express.Router();
-const serverHelper = require('../services/helper.js');
+const serverUtil = require('../utils/server-util.js');
 
 
 /************** LOGIN and LOGOUT *****************/
@@ -16,7 +16,7 @@ router.post('/login', function (req, res) {
 	console.log("Email - " + email);
 	console.log("Password - " + password);
 	// code to check email and password against database
-	serverHelper.verifyUser(email, password).then(function(isValidUser){
+	serverUtil.verifyUser(email, password).then(function(isValidUser){
 		console.log(isValidUser);
 		if (isValidUser) {
 			
