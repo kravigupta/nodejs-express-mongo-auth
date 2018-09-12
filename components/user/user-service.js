@@ -1,13 +1,13 @@
-UserModel = db.model('User');
-
+var UserModel = require('./user-model');
 async function verifyUser(email, password) {
-	let user = await UserModel.find({ email: email, password: password });
+	var user = await UserModel.getUser(email, password);
 	if (user.length > 0) {
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 }
+
+
 module.exports = {
 	verifyUser: verifyUser
-}
+};

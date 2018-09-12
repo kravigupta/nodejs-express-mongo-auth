@@ -1,6 +1,6 @@
 const express = require("express");
 var router = express.Router();
-const serverUtil = require('../utils/server-util.js');
+
 
 
 /************** LOGIN and LOGOUT *****************/
@@ -10,27 +10,26 @@ router.get('/login', function (req, res) {
 	res.render('index.html');
 });
 
-router.post('/login', function (req, res) {
+router.post('/login', async function (req, res) {
 	var email = req.body.email;
 	var password = req.body.password;
 	console.log("Email - " + email);
 	console.log("Password - " + password);
 	// code to check email and password against database
-	serverUtil.verifyUser(email, password).then(function(isValidUser){
-		console.log(isValidUser);
-		if (isValidUser) {
-			
-			session = req.session;
-			session.email = email;
-			// render the html
-			res.redirect('/home');
-		} else {
-			res.redirect('/login');
-		}
-	});
-	
 
+	const isValidUser = await AuthUtil.verifyUser(email, password);
 
+	// AuthUtil.verifyUser(email, password).then(function(isValidUser){
+	// console.log(isValidUser);
+	if (isValidUser) {
+
+		session = req.session;
+		session.email = email;
+		// render the html
+		res.redirect('/home');
+	} else {
+		res.redirect('/login');
+	}
 });
 
 router.get('/logout', function (req, res) {

@@ -1,63 +1,26 @@
-global.path = require("path");
+// config
+require('./config/server-config');
 
-require("console-stamp")(console, {
-	colors: {
-		stamp: "yellow",
-		label: "white",
-		metadata: "green"
-	},
-	pattern: "yyyy-mm-dd HH:MM:ss Z"
-});
+// globals
+require('./config/globals');
 
-global.config = {
-	port: 10000,
-	host: '127.0.0.1',
-	db : {
-		user: 'ravi',
-		password: 'ravi',
-		host: '127.0.0.1',
-		port: 27017,
-		dbname: 'Server',
-		authDB: 'admin'
-	}
-}
-
-global.db = require('mongoose');
 // db connection
-require('./config/db.js');
+require('./config/mongo-db');
+
 
 
 const express = require("express");
 var app = express();
+require('./middleware')(app);
 
-const bodyParser = require("body-parser");
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
-
-const cookieParser = require("cookie-parser");
-app.use(cookieParser());
-
-const session = require("express-session");
-app.use(session({ secret: '!@@#$@#$XCS@#$%#$DS$#%&$%^$%', key: 'server' }));
-
-app.use(express.static(path.join(__dirname, "public")));
-
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
-app.engine('html', require('ejs').renderFile);
-
-var routes = require("./router/routes");
+var routes = require("./router");
 app.use("/", routes);
 
 function startServer() {
-
-	const UserModel = db.model('User');
-	console.log(UserModel);
 	console.log("Starting Server ..");
-	app.listen(config.port, config.host, function () {
-		console.log("Server is listening on port " + config.port);
+	app.listen(ServerConfig.port, ServerConfig.host, function () {
+		console.log("Server is listening on port " + ServerConfig.port);
 	});
 }
-
 
 startServer();
